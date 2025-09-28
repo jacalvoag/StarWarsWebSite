@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Wiki - Inicio</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>STAR WARS WIKI 🌌</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="activo">Inicio</a></li>
+                <li><a href="personajes.html">Personajes</a></li>
+                <li><a href="naves.html">Naves Estelares</a></li>
+                <li><a href="planetas.html">Planetas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="contenido-principal">
+        <h2>Bienvenido a la Galaxia</h2>
+        
+        <section id="seccion-bienvenida">
+            <p>Explora la vasta base de datos de la saga Star Wars. Usa la barra de navegación para empezar tu viaje.</p>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Personajes</h3>
+                    <p id="total-personajes">Cargando...</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Naves</h3>
+                    <p id="total-naves">Cargando...</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Planetas</h3>
+                    <p id="total-planetas">Cargando...</p>
+                </div>
+            </div>
+        </section>
+
+        <img src="media/banner-star-wars.png" alt="Imagen representativa de Star Wars" class="banner">
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Star Wars Wiki Básico | Datos proporcionados por SWAPI</p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
