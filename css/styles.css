@@ -96,3 +96,43 @@ footer {
     transform: translateY(-2px); 
     color: #ffe81f; 
 }
+
+.banner {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover; 
+    border-radius: 8px;
+    margin-top: 30px;
+    opacity: 0.8; 
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around; 
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 250px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333; 
+}
+
+.stat-card h3 {
+    color: #ffe81f;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #f0f0f0; 
+}
