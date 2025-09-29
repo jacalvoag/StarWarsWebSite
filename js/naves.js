@@ -1,67 +1,103 @@
 const API_URL = 'https://swapi.dev/api/';
 
+let todasLasNaves = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal');
     const cerrar = document.getElementsByClassName("cerrar-modal")[0];
 
     if (cerrar) {
-        cerrar.onclick = function() {
-            modal.style.display = "none";
-        }
+        cerrar.onclick = function() { modal.style.display = "none"; }
     }
 
     window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+        if (event.target == modal) { modal.style.display = "none"; }
     }
 });
 
 
 
-function cargarListaNaves() {
+function renderizarLista(datos) {
     const listaNaves = document.getElementById('naves-listado');
-    
-    if (!listaNaves) {
+    listaNaves.innerHTML = ''; // Limpiar lista
+
+    if (datos.length === 0) {
+        listaNaves.innerHTML = '<li>No se encontraron resultados.</li>';
         return;
     }
 
-    fetch(`${API_URL}starships/`)
-        .then(response => response.json())
-        .then(data => {
-            const naves = data.results;
-            listaNaves.innerHTML = ''; 
+    datos.forEach(nave => {
+        const li = document.createElement('li');
+        li.textContent = nave.name; 
+        
+        li.addEventListener('click', () => {
+            const modal = document.getElementById('modal');
+            const modalCuerpo = document.getElementById('modal-cuerpo');
+            const modalTitulo = document.getElementById('modal-titulo'); 
 
-            naves.forEach(nave => {
-                const li = document.createElement('li');
-                li.textContent = nave.name;
-                
-                li.addEventListener('click', () => {
-                    const modal = document.getElementById('modal');
-                    const modalCuerpo = document.getElementById('modal-cuerpo');
-                    const modalTitulo = document.getElementById('modal-titulo'); 
-
-                    modalTitulo.textContent = `Detalles de ${nave.name}`;
-                    
-                    const detalles = `
+            modalTitulo.textContent = `Detalles de ${nave.name}`;
+            
+            const detalles = `
 Nombre: ${nave.name}
 Modelo: ${nave.model}
 Fabricante: ${nave.manufacturer}
 Costo: ${nave.cost_in_credits} créditos
 Tripulación: ${nave.crew}
-                    `;
-                    
-                    modalCuerpo.innerHTML = detalles.replace(/\n/g, '<br>');
-                    modal.style.display = "block";
-                });
-                
-                listaNaves.appendChild(li);
-            });
-        })
-        .catch(error => {
-            console.error('Error al cargar la lista de naves:', error);
-            listaNaves.innerHTML = '<li>Hubo un error al obtener los datos.</li>';
+            `;
+            
+            modalCuerpo.innerHTML = detalles.replace(/\n/g, '<br>');
+            modal.style.display = "block";
         });
+        
+        listaNaves.appendChild(li);
+    });
 }
 
-cargarListaNaves();
+
+
+function buscarDatos() {
+    const input = document.getElementById('busqueda-input');
+    const busqueda = input.value.toLowerCase();
+
+    const datosFiltrados = todasLasNaves.filter(item => {
+        return item.name.toLowerCase().includes(busqueda);
+    });
+
+    renderizarLista(datosFiltrados);
+}
+
+
+
+async function cargarTodasLasNaves(url = `${API_URL}starships/`) {
+    const listaNaves = document.getElementById('naves-listado');
+    if (!listaNaves) return;
+    
+    try {
+        const respuesta = await fetch(url);
+        const datos = await respuesta.json();
+
+        todasLasNaves = todasLasNaves.concat(datos.results);
+
+        if (datos.next) {
+            await cargarTodasLasNaves(datos.next);
+        } else {
+            renderizarLista(todasLasNaves);
+
+            const busquedaBoton = document.getElementById('busqueda-boton');
+            const busquedaInput = document.getElementById('busqueda-input');
+
+            busquedaBoton.addEventListener('click', buscarDatos);
+            busquedaInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    buscarDatos();
+                }
+            });
+        }
+
+    } catch(error) {
+        console.error('Error al cargar datos:', error);
+        listaNaves.innerHTML = '<li>Hubo un error al obtener todos los datos.</li>';
+    }
+}
+
+cargarTodasLasNaves();
