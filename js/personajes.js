@@ -19,16 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderizarLista(datos) {
     const listaPersonajes = document.getElementById('personajes-listado');
-    listaPersonajes.innerHTML = ''; // Limpiar lista
+    listaPersonajes.innerHTML = ''; 
 
     if (datos.length === 0) {
         listaPersonajes.innerHTML = '<li>No se encontraron resultados.</li>';
         return;
     }
 
-    datos.forEach(personaje => {
+    datos.forEach((personaje) => {
         const li = document.createElement('li');
-        li.textContent = personaje.name; 
+
+        li.textContent = personaje.name;
         
         li.addEventListener('click', () => {
             const modal = document.getElementById('modal');
@@ -36,16 +37,15 @@ function renderizarLista(datos) {
             const modalTitulo = document.getElementById('modal-titulo'); 
 
             modalTitulo.textContent = `Detalles de ${personaje.name}`;
-            
-            const detalles = `
-Nombre: ${personaje.name}
-Altura: ${personaje.height} cm
-Peso: ${personaje.mass} kg
-Color de Pelo: ${personaje.hair_color}
-Color de Ojos: ${personaje.eye_color}
+
+            modalCuerpo.innerHTML = `
+                <div class="modal-linea"><strong>Nombre:</strong> ${personaje.name}</div>
+                <div class="modal-linea"><strong>Altura:</strong> ${personaje.height} cm</div>
+                <div class="modal-linea"><strong>Peso:</strong> ${personaje.mass} kg</div>
+                <div class="modal-linea"><strong>Color de Pelo:</strong> ${personaje.hair_color}</div>
+                <div class="modal-linea"><strong>Color de Ojos:</strong> ${personaje.eye_color}</div>
             `;
             
-            modalCuerpo.innerHTML = detalles.replace(/\n/g, '<br>');
             modal.style.display = "block";
         });
         
@@ -59,7 +59,6 @@ function buscarDatos() {
     const input = document.getElementById('busqueda-input');
     const busqueda = input.value.toLowerCase();
     
-    // Filtramos sobre el array global de datos
     const datosFiltrados = todosLosPersonajes.filter(item => {
         return item.name.toLowerCase().includes(busqueda);
     });
@@ -76,7 +75,7 @@ async function cargarTodosLosPersonajes(url = `${API_URL}people/`) {
     try {
         const respuesta = await fetch(url);
         const datos = await respuesta.json();
-
+        
         todosLosPersonajes = todosLosPersonajes.concat(datos.results);
 
         if (datos.next) {

@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderizarLista(datos) {
     const listaNaves = document.getElementById('naves-listado');
-    listaNaves.innerHTML = ''; // Limpiar lista
+    listaNaves.innerHTML = ''; 
 
     if (datos.length === 0) {
         listaNaves.innerHTML = '<li>No se encontraron resultados.</li>';
         return;
     }
 
-    datos.forEach(nave => {
+    datos.forEach((nave) => {
         const li = document.createElement('li');
         li.textContent = nave.name; 
         
@@ -36,16 +36,15 @@ function renderizarLista(datos) {
             const modalTitulo = document.getElementById('modal-titulo'); 
 
             modalTitulo.textContent = `Detalles de ${nave.name}`;
-            
-            const detalles = `
-Nombre: ${nave.name}
-Modelo: ${nave.model}
-Fabricante: ${nave.manufacturer}
-Costo: ${nave.cost_in_credits} créditos
-Tripulación: ${nave.crew}
+
+            modalCuerpo.innerHTML = `
+                <div class="modal-linea"><strong>Nombre:</strong> ${nave.name}</div>
+                <div class="modal-linea"><strong>Modelo:</strong> ${nave.model}</div>
+                <div class="modal-linea"><strong>Fabricante:</strong> ${nave.manufacturer}</div>
+                <div class="modal-linea"><strong>Costo:</strong> ${nave.cost_in_credits} créditos</div>
+                <div class="modal-linea"><strong>Tripulación:</strong> ${nave.crew}</div>
             `;
             
-            modalCuerpo.innerHTML = detalles.replace(/\n/g, '<br>');
             modal.style.display = "block";
         });
         
@@ -58,7 +57,7 @@ Tripulación: ${nave.crew}
 function buscarDatos() {
     const input = document.getElementById('busqueda-input');
     const busqueda = input.value.toLowerCase();
-
+    
     const datosFiltrados = todasLasNaves.filter(item => {
         return item.name.toLowerCase().includes(busqueda);
     });
@@ -75,14 +74,14 @@ async function cargarTodasLasNaves(url = `${API_URL}starships/`) {
     try {
         const respuesta = await fetch(url);
         const datos = await respuesta.json();
-
+        
         todasLasNaves = todasLasNaves.concat(datos.results);
 
         if (datos.next) {
             await cargarTodasLasNaves(datos.next);
         } else {
             renderizarLista(todasLasNaves);
-
+A
             const busquedaBoton = document.getElementById('busqueda-boton');
             const busquedaInput = document.getElementById('busqueda-input');
 

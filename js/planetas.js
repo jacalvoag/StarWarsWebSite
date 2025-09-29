@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.onclick = function(event) {
-        if (event.target == modal) { modal.style.display = "none"; }
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 });
 
@@ -19,16 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderizarLista(datos) {
     const listaPlanetas = document.getElementById('planetas-listado');
-    listaPlanetas.innerHTML = ''; // Limpiar lista
+    listaPlanetas.innerHTML = ''; 
 
     if (datos.length === 0) {
         listaPlanetas.innerHTML = '<li>No se encontraron resultados.</li>';
         return;
     }
 
-    datos.forEach(planeta => {
+    datos.forEach((planeta) => {
         const li = document.createElement('li');
-        li.textContent = planeta.name; 
+        li.textContent = planeta.name;
         
         li.addEventListener('click', () => {
             const modal = document.getElementById('modal');
@@ -36,16 +38,15 @@ function renderizarLista(datos) {
             const modalTitulo = document.getElementById('modal-titulo'); 
 
             modalTitulo.textContent = `Detalles de ${planeta.name}`;
-            
-            const detalles = `
-Nombre: ${planeta.name}
-Clima: ${planeta.climate}
-Terreno: ${planeta.terrain}
-Población: ${planeta.population}
-Diámetro: ${planeta.diameter}
+
+            modalCuerpo.innerHTML = `
+                <div class="modal-linea"><strong>Nombre:</strong> ${planeta.name}</div>
+                <div class="modal-linea"><strong>Clima:</strong> ${planeta.climate}</div>
+                <div class="modal-linea"><strong>Terreno:</strong> ${planeta.terrain}</div>
+                <div class="modal-linea"><strong>Población:</strong> ${planeta.population}</div>
+                <div class="modal-linea"><strong>Diámetro:</strong> ${planeta.diameter} km</div>
             `;
             
-            modalCuerpo.innerHTML = detalles.replace(/\n/g, '<br>');
             modal.style.display = "block";
         });
         
@@ -59,7 +60,6 @@ function buscarDatos() {
     const input = document.getElementById('busqueda-input');
     const busqueda = input.value.toLowerCase();
     
-    // Filtramos sobre el array global de datos
     const datosFiltrados = todosLosPlanetas.filter(item => {
         return item.name.toLowerCase().includes(busqueda);
     });
@@ -76,7 +76,7 @@ async function cargarTodosLosPlanetas(url = `${API_URL}planets/`) {
     try {
         const respuesta = await fetch(url);
         const datos = await respuesta.json();
-
+        
         todosLosPlanetas = todosLosPlanetas.concat(datos.results);
 
         if (datos.next) {
