@@ -65,3 +65,34 @@ footer {
     font-size: 0.9em;
     color: #888;
 }
+
+#personajes-listado, 
+#naves-listado, 
+#planetas-listado {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+}
+
+#personajes-listado li,
+#naves-listado li,
+#planetas-listado li {
+    background-color: #222;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer; 
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#personajes-listado li:hover,
+#naves-listado li:hover,
+#planetas-listado li:hover {
+    background-color: #333;
+    transform: translateY(-2px); 
+    color: #ffe81f; 
+}
