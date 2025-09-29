@@ -42,8 +42,8 @@ function renderizarLista(datos) {
                 <div class="modal-linea"><strong>Nombre:</strong> ${personaje.name}</div>
                 <div class="modal-linea"><strong>Altura:</strong> ${personaje.height} cm</div>
                 <div class="modal-linea"><strong>Peso:</strong> ${personaje.mass} kg</div>
-                <div class="modal-linea"><strong>Color de Pelo:</strong> ${personaje.hair_color}</div>
-                <div class="modal-linea"><strong>Color de Ojos:</strong> ${personaje.eye_color}</div>
+                <div class="modal-linea"><strong>Color de Pelo:</strong> ${traducir(personaje.hair_color)}</div>
+                <div class="modal-linea"><strong>Color de Ojos:</strong> ${traducir(personaje.eye_color)}</div>
             `;
             
             modal.style.display = "block";

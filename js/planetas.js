@@ -41,8 +41,8 @@ function renderizarLista(datos) {
 
             modalCuerpo.innerHTML = `
                 <div class="modal-linea"><strong>Nombre:</strong> ${planeta.name}</div>
-                <div class="modal-linea"><strong>Clima:</strong> ${planeta.climate}</div>
-                <div class="modal-linea"><strong>Terreno:</strong> ${planeta.terrain}</div>
+                <div class="modal-linea"><strong>Clima:</strong> ${traducir(planeta.climate)}</div>
+                <div class="modal-linea"><strong>Terreno:</strong> ${traducir(planeta.terrain)}</div>
                 <div class="modal-linea"><strong>Población:</strong> ${planeta.population}</div>
                 <div class="modal-linea"><strong>Diámetro:</strong> ${planeta.diameter} km</div>
             `;

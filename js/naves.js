@@ -1,4 +1,4 @@
-const API_URL = 'https://swapi.dev/api/';
+const API_URL = 'https://swapi.dev/api/';   
 
 let todasLasNaves = [];
 
@@ -81,7 +81,6 @@ async function cargarTodasLasNaves(url = `${API_URL}starships/`) {
             await cargarTodasLasNaves(datos.next);
         } else {
             renderizarLista(todasLasNaves);
-A
             const busquedaBoton = document.getElementById('busqueda-boton');
             const busquedaInput = document.getElementById('busqueda-input');
 
