@@ -4,33 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Wars Wiki - Personajes</title> 
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/listas.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/listas.css">
 </head>
 <body>
     <header>
-        <h1><img src="media/StarWarsLogo.png" alt="Logo de Star Wars" class="logo-principal"></h1>
+        <h1><img src="../media/StarWarsLogo.png" alt="Logo de Star Wars" class="logo-principal"></h1>
         <nav>
             <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="personajes.html">Personajes</a></li>
-                <li><a href="naves.html" class="activo">Naves Estelares</a></li>
+                <li><a href="../index.html">Inicio</a></li> 
+                <li><a href="personajes.html" class="activo">Personajes</a></li>
+                <li><a href="naves.html">Naves Estelares</a></li>
                 <li><a href="planetas.html">Planetas</a></li>
             </ul>
         </nav>
     </header>
 
     <main id="contenido-principal">
-        <h2>Naves Estelares y Vehículos</h2>
-        
+        <h2>Personajes Principales y Secundarios</h2>
+
         <section class="busqueda-seccion">
             <input type="text" id="busqueda-input" placeholder="Buscar por nombre..." aria-label="Barra de búsqueda">
             <button id="busqueda-boton"></button>
         </section>
-
-        <section id="lista-naves">
-            <ul id="naves-listado">
-                <li>Cargando naves...</li>
+        
+        <section id="lista-personajes">
+            <ul id="personajes-listado">
+                <li>Cargando personajes...</li>
             </ul>
         </section>
     </main>
@@ -47,7 +47,7 @@
         <p>&copy; 2024 Star Wars Wiki Básico | Datos proporcionados por SWAPI</p>
     </footer>
 
-    <script src="js/traducciones.js"></script>
-    <script src="js/naves.js"></script>
+    <script src="../js/traducciones.js"></script>
+    <script src="../js/personajes.js"></script>
 </body>
 </html>
